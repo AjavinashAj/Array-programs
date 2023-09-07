@@ -1,0 +1,106 @@
+package librarianManagementApplication_23may2023;
+import java.sql.*;
+import java.util.*;
+public class Library {
+
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","avinash");
+		PreparedStatement ps=con.prepareStatement("insert into librarian values(?,?,?,?,?,?)");
+		PreparedStatement ps1=con.prepareStatement("select * from librarian");
+		while(true)
+		{
+			System.out.println("========Enter choice===========\n1.Admin Login\n2.Librarian Login\n3.Exit");
+			int choice=Integer.parseInt(s.nextLine());
+			switch(choice)
+			{
+			case 1:
+				while(true)
+				{
+				    System.out.println("=======Welcome To Admin Page ======\n1.Add Librarian\n2.View Librarian\n3.Delete Librarian\n4.LogOut");
+				    int choice1=Integer.parseInt(s.nextLine());
+				    switch(choice1)
+				    {
+				    case 1:
+				    	System.out.println("Enter Librarian Id");
+				    	String id=s.nextLine();
+				    	System.out.println("Enter Librarian Name");
+				    	String name=s.nextLine();
+				    	System.out.println("Enter Librarian Address");
+				    	String addr=s.nextLine();
+				    	System.out.println("Enter Email Id");
+				    	String email=s.nextLine();
+				    	System.out.println("Enter Phno");
+				    	Long phno=Long.parseLong(s.nextLine());
+				    	System.out.println("Enter Password");
+				    	String pwd=s.nextLine();
+				    	
+				    	ps.setString(1, id);
+				    	ps.setString(2, name);
+				    	ps.setString(3, addr);
+				    	ps.setString(4, email);
+				    	ps.setLong(5, phno);
+				    	ps.setString(6, pwd);
+				    	int k=ps.executeUpdate();
+				    	if(k>0) {System.out.println("Librarian Added Successfully....");}
+				    	break;
+				    case 2:
+				    	ResultSet rs=ps1.executeQuery();
+				    	while(rs.next())
+				    	{
+				    		System.out.println(rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3)+"\t"+rs.getString(4)+"\t"+rs.getLong(5)+"\t"+rs.getString(6));
+				    	}
+				    	break;
+				    case 3:
+				    	break;
+				    case 4:
+				    	System.out.println("LogOut Successfully.....");
+				    	System.exit(0);
+				    	break;
+				    default:
+				    	break;
+				    }
+				}
+				
+			case 2:
+				while(true)
+				{
+					System.out.println("======Welcome to Librarian Page========\n1.Add Book\n2.View Books\n3.Issue Book\n4.View Issue Book\n5.Return Book\n6.LogOut");
+					int choice2=Integer.parseInt(s.nextLine());
+					switch(choice2)
+					{
+					    case 1:
+					    	break;
+					    case 2:
+					    	break;
+					    case 3:
+					    	break;
+					    case 4:
+					    	break;
+					    case 5:
+					    	break;
+					    case 6:
+					    	System.out.println("Logout Successfully....");
+					    	System.exit(0);
+					    	break;
+					    default:
+					    	System.out.println("invalid input....");
+					}
+				}
+				
+			case 3:
+				System.out.println("Exit Successfully....");
+				System.exit(0);
+				break;
+			default:
+				System.out.println("invalid input");
+				break;
+			}
+			
+		}
+		}catch(Exception e) {e.printStackTrace();}
+	}
+
+}

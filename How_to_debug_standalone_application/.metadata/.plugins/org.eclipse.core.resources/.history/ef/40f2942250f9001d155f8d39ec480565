@@ -1,0 +1,31 @@
+package librarianManagementApplication_23may2023;
+import java.sql.*;
+import java.util.*;
+public class Library {
+
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		while(true)
+		{
+			System.out.println("========Enter choice===========\n1.Admin Login\n2.Librarian Login\n3.Exit");
+			int choice=Integer.parseInt(s.nextLine());
+			switch(choice)
+			{
+			case 1:
+				break;
+			case 2:
+				break;
+			case 3:
+				System.out.println("Exit Successfully....");
+				System.exit(0);
+				break;
+			default:
+				System.out.println("invalid input");
+				break;
+			}
+			
+		}
+
+	}
+
+}
